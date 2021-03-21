@@ -1,42 +1,102 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
 import Header from '../../components/modules/Header';
 import SectionTitle from '../../components/modules/SectionTitle';
-
-import { Container, Content } from './styles';
-import { Grid } from '../../styles/grid';
 import Footer from '../../components/modules/Footer';
 import ComicCard from '../../components/modules/ComicCard';
+import Spinner from '../../components/elements/Spinner';
+
+import { Grid } from '../../styles/grid';
+import { Container, Content } from '../../styles/CharacterDetail.styles';
+
+import api from '../../services/api';
+
+interface Character {
+  name: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  }
+}
+
+interface Comics {
+  title: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  }
+}
 
 export default function CharacterDetail() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [hasSpinner, setHasSpinner] = useState(false);
+  const [characterDetails, setCharacterDetails] = useState<Character>();
+  const [comics, setComics] = useState<Comics[]>([]);
+
+  useEffect(() => {
+
+    setHasSpinner(true);
+
+    api.get(`characters/${id}?${apiParams.tsKeyHash}`).then((response) => {
+      setCharacterDetails(response.data.data.results[0]);
+    }).catch((error) => {
+      console.error(error)
+    })
+
+    api.get(`characters/${id}/comics?${apiParams.tsKeyHash}`).then((response) => {
+      setComics(response.data.data.results);
+      setHasSpinner(false);
+    }).catch((error) => {
+      setHasSpinner(true);
+      console.error(error)
+    })
+
+  }, [])
+
+  console.log(comics);
+
   return (
     <>
       <Header />
       <Container>
+        {hasSpinner ? (<Spinner />) :
+          <>
+            {characterDetails && (
+              <>
+                <SectionTitle title="ABOUT" />
 
-        <SectionTitle title="ABOUT" />
+                <Content>
+                  <div className="container-image">
+                    <img src={`${characterDetails.thumbnail.path}/standard_fantastic.${characterDetails.thumbnail.extension}`} alt="3-D Man" />
+                  </div>
 
-        <Content>
-          <div className="container-image">
-            <img src="/assets/images/535fecbbb9784.jpg" alt="3-D Man" />
-          </div>
+                  <div className="context">
+                    <div className="name">
+                      <h2>{characterDetails.name}</h2>
+                    </div>
+                    <div className="description">
+                      <p>{characterDetails.description ? characterDetails.description : 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.'}</p>
+                    </div>
+                  </div>
+                </Content>
 
-          <div className="context">
-            <div className="name">
-              <h2>3-D Man</h2>
-            </div>
-            <div className="description">
-              <p>Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction!</p>
-            </div>
-          </div>
-        </Content>
+                <SectionTitle title={`${characterDetails.name}'s COMICS`} />
 
-        <SectionTitle title="3-D Man's COMICS" />
-
-        <Grid>
-          <ComicCard image="/assets/images/5ba3bfcc55f5a.jpg" title="Hulk (2008) #53" />
-          <ComicCard image="/assets/images/5ba3bfcc55f5a.jpg" title="Hulk (2008) #53" />
-          <ComicCard image="/assets/images/5ba3bfcc55f5a.jpg" title="Hulk (2008) #53" />
-          <ComicCard image="/assets/images/5ba3bfcc55f5a.jpg" title="Hulk (2008) #53" />
-        </Grid>
+                <Grid>
+                  {
+                    comics.length > 0 && comics.map(comic => (
+                      <ComicCard image={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`} title={comic.title} />
+                    ))
+                  }
+                </Grid>
+              </>
+            )}
+          </>
+        }
       </Container>
       <Footer />
     </>
