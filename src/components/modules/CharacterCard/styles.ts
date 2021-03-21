@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  grid-column: span 3 ;
+  /* grid-column: span 3; */
+
+  @media screen and (max-width: 800px) {
+    grid-column: span 12;
+  }
+
+  @media screen and (min-width:801px) and (max-width: 1023px) {
+    grid-column: span 6;
+  }
+
+  @media screen and (min-width: 1024px) {
+    grid-column: span 3;
+  }
 
   display: flex;
   flex-direction: column;
