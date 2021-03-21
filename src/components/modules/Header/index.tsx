@@ -20,7 +20,7 @@ export default function Header() {
             <li>
               <Link href="/">
                 <a>
-                  INICIO
+                  HOME
                 </a>
               </Link>
             </li>
