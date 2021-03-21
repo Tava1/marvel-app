@@ -41,13 +41,13 @@ export default function CharacterDetail() {
 
     setHasSpinner(true);
 
-    api.get(`characters/${id}?${apiParams.tsKeyHash}`).then((response) => {
+    api.get(`characters/${id}?${process.env.MARVEL_API_KEY}`).then((response) => {
       setCharacterDetails(response.data.data.results[0]);
     }).catch((error) => {
       console.error(error)
     })
 
-    api.get(`characters/${id}/comics?${apiParams.tsKeyHash}`).then((response) => {
+    api.get(`characters/${id}/comics?${process.env.MARVEL_API_KEY}`).then((response) => {
       setComics(response.data.data.results);
       setHasSpinner(false);
     }).catch((error) => {

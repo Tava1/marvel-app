@@ -35,10 +35,9 @@ export default function CharactersList() {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-
     setHasSpinner(true);
 
-    api.get(`characters?limit=${LIMIT}&offset=${offset}&${apiParams.tsKeyHash}`).then((response) => {
+    api.get(`characters?limit=${LIMIT}&offset=${offset}&${process.env.MARVEL_API_KEY}`).then((response) => {
       setRequestInfo(response.data.data);
       setCharacters(response.data.data.results);
       setHasSpinner(false);
