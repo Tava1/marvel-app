@@ -13,7 +13,7 @@ export default function Footer() {
             <FaGithub size={40} />
           </a>
         </div>
-        <p>Devoloped by Gustavo Santos</p>
+        <p>Developed by Gustavo Santos</p>
       </Content>
     </Container>
   );

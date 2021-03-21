@@ -7,14 +7,22 @@ export default function Header() {
       <Content>
         <div>
           <h1>
-            <Link href="/">MARVEL BOOK</Link>
+            <Link href="/">
+              <a>
+                MARVEL BOOK
+              </a>
+            </Link>
           </h1>
         </div>
 
         <nav>
           <ul>
             <li>
-              <Link href="/">INICIO</Link>
+              <Link href="/">
+                <a>
+                  INICIO
+                </a>
+              </Link>
             </li>
           </ul>
         </nav>

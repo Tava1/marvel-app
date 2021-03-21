@@ -51,10 +51,10 @@ yarn build
 ## Estrutura de diretórios do projeto
 
 ### src
-Este diretório armazena toda o código desenvolvido ou seja, lógica da aplicação, componentes, páginas, rotas, serviços e etc.
+Este diretório armazena todo o código desenvolvido ou seja, lógica da aplicação, componentes, páginas, rotas, serviços e etc.
 
 ### components/elements
-Contém apenas componentes estáticos
+Contém apenas componentes estáticos, poder ser utilizado pelos ```components/mudules``` ou até mesmo por ```/pages```.
 
 ### components/modules
 Contém componentes mais robustos, aqueles que podem conter lógica e/ou receber ```props```.

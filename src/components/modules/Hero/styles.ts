@@ -21,10 +21,15 @@ export const Context = styled.div`
   justify-content: center;
   align-items: center;
 
+  h2 {
+    font-size: 2rem;
+  }
+
   p {
     background: #EC1D24;
     display: inline;
     font-weight: 600;
     padding: 0.3rem 0.5rem;
+    font-size: 1.5rem;
   }
 `;

@@ -13,7 +13,7 @@ export default function Hero() {
 
       <Context>
         <h2>MARVEL BOOK</h2>
-        <p>ALGUM TEXTINHO DA HORA AQUI</p>
+        <p>A place to meet your favorite characters</p>
       </Context>
     </Container>
   );
