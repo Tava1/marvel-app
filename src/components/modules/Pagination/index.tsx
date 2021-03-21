@@ -18,6 +18,9 @@ export default function Pagination({ limit, total, offset, setOffset }) {
             <li key={page}>
               <button
                 onClick={() => setOffset((page - 1) * limit)}
+                className={
+                  page === currentPage ? 'current-page' : ''
+                }
               >
                 {page}
               </button>

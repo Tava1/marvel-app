@@ -26,6 +26,11 @@ export const Container = styled.div`
           color: #0A0F0D;
         }
       }
+
+      .current-page {
+        background: #F9F9F9;
+        color: #0A0F0D;
+      }
     }
   }
 `;
