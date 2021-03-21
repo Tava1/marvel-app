@@ -1,5 +1,5 @@
-# MARVEL APP
-Este projeto tem como objetivo consumir a [API da MARVEL](https://developer.marvel.com/) disponibilizando os dados em telas por meio de um projeto React. Para realizar as requisições foi utilizado o pacote ```axios```.
+# MARVEL APP :atom_symbol:
+Este projeto tem como objetivo consumir a [API da MARVEL](https://developer.marvel.com/) disponibilizando os dados em telas por meio de um projeto [React](https://pt-br.reactjs.org/). Para realizar as requisições foi utilizado o pacote ```axios```.
 
 ## Visite o site :link:
 
@@ -11,7 +11,7 @@ Publicação realizada pelo [Vercel](https://vercel.com/).
 
 A página inicial lista os personagens, é possível caminhar entre as paginações.
 
-Ao clicar no card de um personagem você será redirecionado para a página que detalha o respectivo personagem. Lá é possivel visualizar mais informações sobre o personagem, logo abaixo existe uma lista de quadrinhos que o personagem teve sua participação.
+Ao clicar no card de um personagem você será redirecionado para a página que detalha o respectivo personagem. Lá será possível visualizar mais informações, logo abaixo existe uma lista de quadrinhos em que o personagem teve sua participação.
 
 ### Tecnologias utilizadas
 - [React](https://pt-br.reactjs.org/)
@@ -27,7 +27,7 @@ Visite o [projeto no Figma](https://www.figma.com/file/059Ig3UohYHso5KngodOXw/ma
 ## Vamos começar? :smiley:
 ### Instalação do projeto
 
-Após clonar o projeto do [repositório Github](https://github.com/Tava1/marvel-app), caminhe até a raiz do projeto execute o seguinte comando no terminal:
+Após clonar o projeto do [repositório Github](https://github.com/Tava1/marvel-app), navegue até a raiz e execute o seguinte comando no terminal:
 
 Este comando irá instalar todas as dependências necessárias do projeto.
 ```BASH
