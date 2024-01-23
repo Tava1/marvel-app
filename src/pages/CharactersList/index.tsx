@@ -21,7 +21,7 @@ interface Characters {
   thumbnail: {
     path: string;
     extension: string;
-  }
+  };
 }
 
 interface RequestInfoPagination {
@@ -37,15 +37,17 @@ export default function CharactersList() {
   useEffect(() => {
     setHasSpinner(true);
 
-    api.get(`characters?limit=${LIMIT}&offset=${offset}&${process.env.MARVEL_API_KEY}`).then((response) => {
-      setRequestInfo(response.data.data);
-      setCharacters(response.data.data.results);
-      setHasSpinner(false);
-    }).catch((error) => {
-      setHasSpinner(true);
-      console.error(error);
-    })
-
+    api
+      .get(`characters?limit=${LIMIT}&offset=${offset}`)
+      .then(response => {
+        setRequestInfo(response.data.data);
+        setCharacters(response.data.data.results);
+        setHasSpinner(false);
+      })
+      .catch(error => {
+        setHasSpinner(true);
+        console.error(error);
+      });
   }, [offset]);
 
   return (
@@ -53,16 +55,23 @@ export default function CharactersList() {
       <Header />
       <Hero />
       <Container>
-        {hasSpinner ? (<Spinner />)
-          :
+        {hasSpinner ? (
+          <Spinner />
+        ) : (
           <>
             <SectionTitle title="CHARACTERS" />
             <Grid>
-              {
-                characters.length > 0 ? characters.map(character => (
-                  <CharacterCard id={character.id} name={character.name} image={`${character.thumbnail.path}/standard_fantastic.${character.thumbnail.extension}`} />
-                )) : <img src="/assets/images/"></img>
-              }
+              {characters.length > 0 ? (
+                characters.map(character => (
+                  <CharacterCard
+                    id={character.id}
+                    name={character.name}
+                    image={`${character.thumbnail.path}/standard_fantastic.${character.thumbnail.extension}`}
+                  />
+                ))
+              ) : (
+                <img src="/assets/images/" />
+              )}
             </Grid>
 
             {requestInfo && (
@@ -74,9 +83,9 @@ export default function CharactersList() {
               />
             )}
           </>
-        }
+        )}
       </Container>
       <Footer />
     </>
-  )
+  );
 }

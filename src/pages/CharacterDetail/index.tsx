@@ -18,7 +18,7 @@ interface Character {
   thumbnail: {
     path: string;
     extension: string;
-  }
+  };
 }
 
 interface Comics {
@@ -26,7 +26,7 @@ interface Comics {
   thumbnail: {
     path: string;
     extension: string;
-  }
+  };
 }
 
 export default function CharacterDetail() {
@@ -38,24 +38,28 @@ export default function CharacterDetail() {
   const [comics, setComics] = useState<Comics[]>([]);
 
   useEffect(() => {
-
     setHasSpinner(true);
 
-    api.get(`characters/${id}?${process.env.MARVEL_API_KEY}`).then((response) => {
-      setCharacterDetails(response.data.data.results[0]);
-    }).catch((error) => {
-      console.error(error)
-    })
+    api
+      .get(`characters/${id}`)
+      .then(response => {
+        setCharacterDetails(response.data.data.results[0]);
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
-    api.get(`characters/${id}/comics?${process.env.MARVEL_API_KEY}`).then((response) => {
-      setComics(response.data.data.results);
-      setHasSpinner(false);
-    }).catch((error) => {
-      setHasSpinner(true);
-      console.error(error)
-    })
-
-  }, [])
+    api
+      .get(`characters/${id}/comics`)
+      .then(response => {
+        setComics(response.data.data.results);
+        setHasSpinner(false);
+      })
+      .catch(error => {
+        setHasSpinner(true);
+        console.error(error);
+      });
+  }, []);
 
   console.log(comics);
 
@@ -63,7 +67,9 @@ export default function CharacterDetail() {
     <>
       <Header />
       <Container>
-        {hasSpinner ? (<Spinner />) :
+        {hasSpinner ? (
+          <Spinner />
+        ) : (
           <>
             {characterDetails && (
               <>
@@ -71,7 +77,10 @@ export default function CharacterDetail() {
 
                 <Content>
                   <div className="container-image">
-                    <img src={`${characterDetails.thumbnail.path}/standard_fantastic.${characterDetails.thumbnail.extension}`} alt="3-D Man" />
+                    <img
+                      src={`${characterDetails.thumbnail.path}/standard_fantastic.${characterDetails.thumbnail.extension}`}
+                      alt="3-D Man"
+                    />
                   </div>
 
                   <div className="context">
@@ -79,7 +88,11 @@ export default function CharacterDetail() {
                       <h2>{characterDetails.name}</h2>
                     </div>
                     <div className="description">
-                      <p>{characterDetails.description ? characterDetails.description : 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.'}</p>
+                      <p>
+                        {characterDetails.description
+                          ? characterDetails.description
+                          : 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.'}
+                      </p>
                     </div>
                   </div>
                 </Content>
@@ -87,18 +100,20 @@ export default function CharacterDetail() {
                 <SectionTitle title={`${characterDetails.name}'s COMICS`} />
 
                 <Grid>
-                  {
-                    comics.length > 0 && comics.map(comic => (
-                      <ComicCard image={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`} title={comic.title} />
-                    ))
-                  }
+                  {comics.length > 0 &&
+                    comics.map(comic => (
+                      <ComicCard
+                        image={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
+                        title={comic.title}
+                      />
+                    ))}
                 </Grid>
               </>
             )}
           </>
-        }
+        )}
       </Container>
       <Footer />
     </>
-  )
+  );
 }
