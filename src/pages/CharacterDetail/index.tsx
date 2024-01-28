@@ -10,7 +10,7 @@ import Spinner from '../../components/elements/Spinner';
 import { Grid } from '../../styles/grid';
 import { Container, Content } from '../../styles/CharacterDetail.styles';
 
-import api from '../../services/api';
+import { api } from '../../services/api';
 
 interface Character {
   name: string;
@@ -40,14 +40,9 @@ export default function CharacterDetail() {
   useEffect(() => {
     setHasSpinner(true);
 
-    api
-      .get(`characters/${id}`)
-      .then(response => {
-        setCharacterDetails(response.data.data.results[0]);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    api.get(`characters/${id}`).then(response => {
+      setCharacterDetails(response.data.data.results[0]);
+    });
 
     api
       .get(`characters/${id}/comics`)
@@ -55,21 +50,18 @@ export default function CharacterDetail() {
         setComics(response.data.data.results);
         setHasSpinner(false);
       })
-      .catch(error => {
+      .catch(() => {
         setHasSpinner(true);
-        console.error(error);
       });
   }, []);
-
-  console.log(comics);
 
   return (
     <>
       <Header />
       <Container>
-        {hasSpinner ? (
-          <Spinner />
-        ) : (
+        {hasSpinner && <Spinner />}
+
+        {!hasSpinner && (
           <>
             {characterDetails && (
               <>

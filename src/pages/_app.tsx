@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <GlobalStyle />
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

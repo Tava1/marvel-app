@@ -12,10 +12,10 @@ export const Content = styled.div`
   align-items: center;
 
   .container-image {
-    border: 4px solid #0A0F0D;
+    border: 4px solid #0a0f0d;
     height: 300px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    
+
     img {
       height: 100%;
     }
@@ -33,24 +33,23 @@ export const Content = styled.div`
       top: -20px;
 
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      
+
       h2 {
         padding: 0.5rem 0.8rem;
         background-color: #f9f9f9;
-        border: 4px solid #0A0F0D;
-        color: #0A0F0D;
+        border: 4px solid #0a0f0d;
+        color: #0a0f0d;
         font-size: 1rem;
       }
-
     }
 
     .description {
       padding: 2.5rem;
       height: 200px;
-      border-top: 4px solid #0A0F0D;
-      border-right: 4px solid #0A0F0D;
-      border-bottom: 4px solid #0A0F0D;
-      color: #0A0F0D;
+      border-top: 4px solid #0a0f0d;
+      border-right: 4px solid #0a0f0d;
+      border-bottom: 4px solid #0a0f0d;
+      color: #0a0f0d;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 
       display: flex;

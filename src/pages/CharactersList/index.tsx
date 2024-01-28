@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import api from '../../services/api';
+import { api } from '../../services/api';
 
 import Header from '../../components/modules/Header';
 import Hero from '../../components/modules/Hero';
@@ -38,15 +38,19 @@ export default function CharactersList() {
     setHasSpinner(true);
 
     api
-      .get(`characters?limit=${LIMIT}&offset=${offset}`)
+      .get('characters', {
+        params: {
+          limit: LIMIT,
+          offset,
+        },
+      })
       .then(response => {
         setRequestInfo(response.data.data);
         setCharacters(response.data.data.results);
         setHasSpinner(false);
       })
-      .catch(error => {
+      .catch(() => {
         setHasSpinner(true);
-        console.error(error);
       });
   }, [offset]);
 
@@ -55,9 +59,9 @@ export default function CharactersList() {
       <Header />
       <Hero />
       <Container>
-        {hasSpinner ? (
-          <Spinner />
-        ) : (
+        {hasSpinner && <Spinner />}
+
+        {!hasSpinner && (
           <>
             <SectionTitle title="CHARACTERS" />
             <Grid>
@@ -70,7 +74,7 @@ export default function CharactersList() {
                   />
                 ))
               ) : (
-                <img src="/assets/images/" />
+                <img src="/assets/images/" alt="" />
               )}
             </Grid>
 
